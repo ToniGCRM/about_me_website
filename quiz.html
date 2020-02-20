@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sorting Quiz</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>  <div class="pageWrapper_hat">
+  <header>
+    <div class="navBar">
+      <nav id="nav_bar">
+       <a class="nav" href="index.html">Home</a>
+       <a class="nav" href="about.html">About Me</a>
+       <a class="nav" href="contact.html">Contact Me</a>
+       <a class="nav" href="Portfolio.html">Web Design Portfolio</a>
+      </nav>
+      </div>
+  </header>
+  <h1>Sorting Hat</h1>
+<form name="quizform">
+<h4>What is your favorite subject in School?</h4>
+<label><input type="radio" name="q1" value="value1" checked> Lunch </label>
+<br/>
+<label><input type="radio" name="q1" value="value2"> PE, or anything physical</label>
+<br/>
+<label><input type="radio" name="q1" value="value3"> History or Civics</label>
+<br/>
+<label><input type="radio" name="q1" value="value4"> How can I pick just one??</label>
+
+
+<h4>You are challenged to a Wizard's duel. What is your spell of choice?</h4>
+<label><input type="radio" name="q2" value="value1" checked> Disarm them. You don't want to fight.</label>
+<br/>
+<label><input type="radio" name="q2" value="value2"> Knock them down, end the fight quickly. </label>
+<br/>
+<label><input type="radio" name="q2" value="value3"> A spell strong enough to hurt them, so they don't attack you again.</label>
+<br/>
+<label><input type="radio" name="q2" value="value4"> An obscure spell you found in the library they won't expect.</label>
+
+<h4>You forgot to study for a test in charms class, what do you do?</h4>
+<label><input type="radio" name="q3" value="value1" checked> Try my hardest to do well, and see if I can get extra credit later if I bomb.</label>
+<br/>
+<label><input type="radio" name="q3" value="value2"> Wing it. Who really needs charms anyway?</label>
+<br/>
+<label><input type="radio" name="q3" value="value3"> Get a little help by peeking on your neightbor's test</label>
+<br/>
+<label><input type="radio" name="q3" value="value4"> This question is ridiculous, I never forget to study</label>
+
+<h4>It's career day, what pamphlet interests you most?</h4>
+<label><input type="radio" name="q4" value="value1" checked> Muggle Relations: They may be stupid, but they're sweet</label>
+<br/>
+<label><input type="radio" name="q4" value="value2"> Aurors: Catching bad wizards, coining cool catchphrases</label>
+<br/>
+<label><input type="radio" name="q4" value="value3"> Magical governing and law: You're important, and your cool badge confirms it</label>
+<br/>
+<label><input type="radio" name="q4" value="value4"> Wizarding Education: Professors, aides, and general know-it-alls</label>
+
+<p><button type="submit">Sort Me!</button></p>
+
+<div id="result_div" style="display:none;">
+<img class="center" id="result_image" alt="">
+<p class ="center" id="result_text"></p>
+
+</div>
+</form>
+<script type="text/javascript">
+(function() {
+    /*************************************************************************
+    This should be the full address to your quiz, in order for the result
+    codes to link to it.
+
+    *************************************************************************/
+    var QUIZ_URL = "file:///Users/tonigalata/Desktop/dpl_prepwork/about_me/quiz.html";
+
+    /*************************************************************************
+    This should be the full address to whatever folder on your website
+    directly contains your result images, ending in a forward slash.
+
+    *************************************************************************/
+    var RESULTS_FOLDER_URL = "../about_me/images/";
+
+    /*************************************************************************
+    Below, enter the possible final results for your quiz.
+
+    The format should be relatively self-explanatory, but here's a rundown
+    anyway:
+
+    Where it says "value1", "value2", etc., enter the name you will put into
+    the VALUE attribute of that result's answers. For example, if Alakazam is
+    one of the possible results in your quiz, you could enter "alakazam". This
+    value will not be displayed to your visitor, so it does not need to be
+    capitalized or punctuated. It should not contain quotation marks,
+    ampersands or backslashes (", & or \).
+
+    Where it says "Result 1", "Result 2", etc., enter the full name of the
+    result, such as "Alakazam". Where it says "result_1.jpg", "result_2.jpg",
+    etc., enter the filename of the image the user should be presented with if
+    they get that result. Where it says "Text for the first result", "Text for
+    the second result", etc., enter the text the user should be presented with
+    if they get that result. (If you do not want them to get any text with
+    their result, you can erase those lines altogether.) Remember to enclose
+    these values in quotes.
+
+    It is also possible to leave out the name, image and text and instead add
+    a link property, like so:
+
+    RESULTS["alakazam"] = {
+        link: "/quiz/alakazam.html"
+    };
+
+    If you do this, then the user will be redirected to the link for their
+    result when they finish the quiz. The link, like a regular HTML link, can
+    be a full URL or an absolute or relative path on your server.
+
+    You can have as many possible results as you like - four is just the
+    default.
+
+    If you want to include "intermediate" results - special results for
+    ties between two or more regular results - those should be entered with
+    an ampersand between the tied values:
+
+    RESULTS["value1&value2"] = {
+        name: "Result 1/2 tie",
+        image: "result_1_2.jpg",
+        text: "Text for a tie between the first and second result"
+    };
+
+    This is completely optional; if you don't include an intermediate result,
+    then the result listed first here will simply take precedence. The order
+    of the values in a tiebreaker result should also match the order given
+    here (that is, "value1&value2" works when value1 comes before value2,
+    while "value2&value1" would not).
+
+    *************************************************************************/
+
+    var RESULTS = {};
+
+    RESULTS["value1"] = {
+        name: "Hufflepuff",
+        image: "huffpuff.jpg",
+        text: "You belong in Hufflepuff house! Hufflepuffs are known to be kind, accepting, and dilligent workers. Welcome!"
+    };
+
+    RESULTS["value2"] = {
+        name: "Gryffindor",
+        image: "gryff.jpg",
+        text: "You belong in Gryffindor house! Gryffindors are loyal, brave, and true. Welcome!"
+    };
+
+    RESULTS["value3"] = {
+        name: "Slytherin",
+        image: "slyth.jpg",
+        text: "You belong in Slytherin house! Slytherins are cunning, strategic, and powerful. Welcome!"
+    };
+
+    RESULTS["value4"] = {
+        name: "Ravenclaw",
+        image: "ravenbadge.jpg",
+        text: "You belong in Ravenclaw house (YAY!). Ravenclaws prize intelligence, wit, and studiousness. Welcome! "
+    };
+
+    /*************************************************************************
+    If for some reason you need to give your form a different name attribute
+    than "quizform", enter it here. Otherwise, leave this alone.
+
+    *************************************************************************/
+    var FORM_NAME = 'quizform';
+
+    /*************************************************************************
+    DO NOT EDIT ANYTHING BELOW THIS POINT
+
+    *************************************************************************/
+
+    var form = document.forms[FORM_NAME];
+    var form_elements = document.forms[FORM_NAME].elements;
+    var form_element;
+    var result_div = document.getElementById("result_div");
+    var result_image = document.getElementById("result_image");
+    var result_text = document.getElementById("result_text");
+   
+
+    // Validate the quiz form to prevent common issues
+    for (var i = 0; i < form_elements.length; i++) {
+        form_element = form_elements[i];
+        if (form_element.type === "radio") {
+            if (form_element.value.indexOf('&') !== -1) {
+                alert("Your quiz form has an answer with an ampersand in the value (" + form_element.value + "). This will cause problems. Please change this value.");
+            }
+            else if (!(form_element.value in RESULTS)) {
+                alert("Your quiz form has an answer with the value " + form_element.value + " but there is no result corresponding to this value. You have probably made a typo somewhere.");
+            }
+        }
+    }
+
+    form.onsubmit = function() {
+        var answers = {};
+        var results = [];
+        var joined_results;
+        var result;
+        var form_element;
+
+        for (var value in RESULTS) {
+            if (value.indexOf('&') === -1) {
+                // Not a joint result
+                answers[value] = 0;
+            }
+        }
+
+        for (var i = 0; i < form_elements.length; i++) {
+            form_element = form_elements[i];
+            if ((form_element.type === "radio" || form_element.type === "checkbox") && form_element.checked) {
+                answers[form_element.value]++;
+            }
+        }
+
+        for (var value in answers) {
+            if (results.length === 0 || answers[value] > answers[results[0]]) {
+                results = [value];
+            }
+            else if (answers[value] === answers[results[0]]) {
+                results.push(value);
+            }
+        }
+
+        while (results.length > 0) {
+            joined_results = results.join('&');
+            if (joined_results in RESULTS) {
+                result = RESULTS[joined_results];
+                break;
+            }
+            else {
+                // No joint result - remove the last element and see if
+                // there's a result for that.
+                results.pop();
+            }
+        }
+
+        if (result.link) {
+            window.location = result.link;
+            return false;
+        }
+
+        if (result_image) {
+            result_image.src = RESULTS_FOLDER_URL + result.image;
+            result_image.setAttribute('alt', result.name);
+            if (result.text) result_image.title = result.text;
+        }
+        if (result_text && result.text) {
+            result_text.innerHTML = result.text;
+        }
+        
+        result_div.style.display = 'block';
+        return false;
+    };
+})();
+
+
+</script>
+</div>
+</body>
+</html>
